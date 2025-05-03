@@ -1,9 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from '../components/ui/button';
+import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 import FC from "../../public/img/face-card.svg"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogFooter
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import {z} from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from 'react-hook-form';
+
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+
+const formSchema = z.object({
+    username: z
+      .string()
+      .min(2, { message: "Username must be at least 2 characters" })
+      .max(50, { message: "Username must be at most 50 characters" }),
+    password: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters long" })
+      .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+      .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+      .regex(/\d/, { message: "Password must contain at least one number" })
+      .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
+});
+
+const signupSchema = z.object({
+  email: z.string().email({message: 'invalid email address'}),
+  fullName: z
+    .string()
+    .min(2, { message: "Username must be at least 2 characters" })
+    .max(50, { message: "Username must be at most 50 characters" }),
+  username: z
+    .string()
+    .min(2, { message: "Username must be at least 2 characters" })
+    .max(50, { message: "Username must be at most 50 characters" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+    .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+    .regex(/\d/, { message: "Password must contain at least one number" })
+    .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
+});
 function Header(props) {
+  const [isLoginView, setIsLoginView] = useState(true);
+  const form = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          username: "",
+          password: ""
+        },
+    })
+    const signup = useForm({
+      resolver: zodResolver(signupSchema),
+      defaultValues: {
+        email: "",
+        fullName: "",
+        username: "",
+        password: ""
+      },
+    })
+   
+    function onSubmit(values) {
+      console.log("submitted!", values);
+      form.reset()
+    }
+    function onSignUp(values){
+      console.log("submitted!", values);
+      signup.reset()
+    }
+
+      
+
     return (
         <div>
             <header className="flex h-20 w-full shrink-0 items-center justify-between  px-4 md:px-6">
@@ -59,18 +145,117 @@ function Header(props) {
                     Testimonials
                     </Link>
                 </nav>
-                <div className='flex items-center justify-between gap-3'>
-                    <div>
-                        <Link className='bg-transparent text-[#282828] '>Login</Link>
-                    </div>
-                    <div>
-                        <Button className='bg-transparent border md:py-4 py-3 text-[#282828]'>Create a Resume</Button>
-                    </div>
-                </div>
+                <Dialog className='flex items-center justify-between gap-3'>
+                  <div className='gap-3 flex'>
+                      <DialogTrigger asChild>
+                          <Button onClick={()=>setIsLoginView(true)} className='bg-transparent shadow-none text-[#282828] border-none' variant="outline">Login</Button>
+                      </DialogTrigger>
+                      <Button className='bg-transparent border md:py-4 py-3 text-[#282828]'>Create a Resume</Button>
+                  </div>
+                  {  isLoginView ?
+                    <DialogContent className="sm:max-w-[425px]">
+                        <DialogTitle>Login</DialogTitle>
+                        <Form {...form}>                        
+                          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <FormField
+                              control={form.control}
+                              name="username"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Username</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Ade12@" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                  <Input type="password" placeholder="Enter your password" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                  Must contain at least 8 characters, uppercase, lowercase, number, and a symbol.
+                                </FormDescription>
+                                <div>
+                                  <p>If you do not have an account <Link className='underline text-[#2C4BFF]' onClick={() => setIsLoginView(false)}>sign up</Link></p>
+                                </div>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                            />
+                            <Button type="submit">Submit</Button>
+                          </form>
+                      </Form>
+                    </DialogContent> :
+                    <DialogContent>
+                      <DialogTitle>Sign Up</DialogTitle>
+                      <Form {...signup}>
+                        <form onSubmit={signup.handleSubmit(onSignUp)} className="space-y-8">
+                          <CustomInput control={signup.control} name="email" label="Email Address" placeholder="example@gmail.com" />
+                          <CustomInput control={signup.control} name="username" label="Username" placeholder="Ade123@" />
+                          
+                          <FormField
+                            control={signup.control}
+                            name="fullName"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Full Name</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Ade john" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />  
+                          <FormField
+                          control={signup.control}
+                          name="password"
+                          render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                              <Input type="password" placeholder="Enter your password" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                              Must contain at least 8 characters, uppercase, lowercase, number, and a symbol.
+                            </FormDescription>                              
+                            <FormMessage />
+                          </FormItem>
+                          )}
+                          />
+                          <Button  type="submit">Submit</Button>
+                        </form>                        
+                      </Form>                     
+                    </DialogContent> 
+                  }
+                </Dialog>
             </header>
         </div>
     );
 }
+
+const CustomInput = ({ control, name, label, placeholder, type = "text" }) => (
+  <FormField
+    control={control}
+    name={name}
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>{label}</FormLabel>
+        <FormControl>
+          <Input placeholder={placeholder} type={type} {...field} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+);
+
 function MenuIcon(props) {
     return (
       <svg
