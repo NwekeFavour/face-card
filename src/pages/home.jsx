@@ -14,12 +14,28 @@ import Polygon from "../../public/img/Polygon.svg"
 import Circle from "../../public/img/circle.svg"
 import Vector from "../../public/img/Group221.svg"
 import Footer from '../components/footer';
-
+import * as motion from "motion/react-client"
+import { useScroll } from 'motion/react';
 
 
 function Home(props) {
-    return (
+    const { scrollYProgress } = useScroll()
+
+    return (    
         <div>
+            <motion.div
+                id="scroll-indicator"
+                style={{
+                    scaleX: scrollYProgress,
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 4,
+                    originX: 0,
+                    backgroundColor: "#2C4BFF",
+                }}
+            />
             <div className='sm:flex sm:mx-12 md:flex block justify-around md:mx-10 lg:mx-20 items-center'>
                 <div className=' md:mx-0 sm:mx-0 mx-5'>
                     <p className="m-0 md:text-[30px] w-[100%] lg:text-[48px] sm:w-[300px] md:w-[400px] lg:w-[487px] sm:text-[28px] text-[26px] leading-[auto] font-bold">Stand out with a professionally designed resume</p>
@@ -33,12 +49,17 @@ function Home(props) {
                         </div>
                     </div>
                 </div>
-                <div className='flex sm:mt-0 items-center mt-6 justify-center'>
-                    <img src={Group} className='lg:w-[588px] w-[300px] md:w-[550px] sm:w-[550px] sm:h-[320px] md:h-[470px]' alt="Hero-img" />
-                </div>
+                <motion.div initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.1,
+                    scale: { type: "spring", visualDuration: 0.2, bounce: 0.8 }
+                }}  className='flex  sm:mt-0 items-center mt-6 justify-center' >
+                    <img src={Group} className='lg:w-[588px] w-[300px] md:w-[550px] sm:w-[550px] sm:h-[320px] md:h-[470px]' loading='lazy' alt="Hero-img" />
+                </motion.div>
             </div>
             <div className='bg-black md:block lg:flex lg:px-5 py-5 md:mt-0 mt-5 px-10 sm:px-14 sm:py-6 lg:py-32  md:py-20 justify-between lg:h-[650px] md:h-[840px] xl:h-[620px] sm:h-[500px] h-[570px] w-[100%]'>
-                <div className='lg:ps-24 sm:ps-14   md:px-6 '>
+                <div   className='lg:ps-24 sm:ps-14   md:px-6 '>
                     <div className='mb-4'>
                         <p className=" lg:text-[42px] text-[26px] md:text-[32px] sm:text-[24px] text-blue-50">Resume Templates</p>
                         <p className='text-[#969696] text-justify'>Create a professional resume effortlessly with our modern, customizable templates. Choose from a variety of layouts tailored for every industry and career stage.</p>
