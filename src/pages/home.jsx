@@ -108,7 +108,7 @@ function Home(props) {
                         <img className='xl:w-[70px] lg:w-[65px] md:w-[50px] w-[60px]' src={Circle} alt="" />
                     </div>
                 </div>
-                <div className='flex md:my-0 my-4 items-center justify-end gap-3'>
+                <div className='flex md:my-0 my-6 items-center justify-end gap-3'>
                     <div className='flex gap-3 items-end'>  
                         <div>
                             <img className='xl:w-[70px] lg:w-[65px] md:w-[50px] w-[60px]' src={Vector} alt="" />
