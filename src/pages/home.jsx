@@ -7,6 +7,13 @@ import  ResumeTwo from "../../public/img/Template2.svg"
 import  Colab from "../../public/img/colab.svg"
 import  GroupOne from "../../public/img/Group.svg"
 import FC from "../../public/img/About.svg"
+import ImageOne from "../../public/img/image 7.svg"
+import ImageTwo from "../../public/img/image 8.svg"
+import ImageThree from "../../public/img/image 9.svg"
+import Polygon from "../../public/img/Polygon.svg"
+import Circle from "../../public/img/circle.svg"
+import Vector from "../../public/img/Group221.svg"
+import Footer from '../components/footer';
 
 
 
@@ -19,7 +26,7 @@ function Home(props) {
                     <p className='lg:text-[16px] md:text-[15px] md:mt-3 sm:mt-4 sm:mb-4 my-4 leading-[200%] text-[#4F4F4F] sm:text-[12px] text-[14px] '>By employing the best practices and innovative tech, Resume Builder boosts your chances of landing a better job – completely for free.</p>
                     <div className='flex items-center gap-4 md:mt-4'>
                          <div>
-                            <Link className="bg-[#2C4BFF] border-none text-gray-50 md:px-6 px-5 py-3 md:py-4">Build Resume</Link>
+                            <Link className="bg-[#2C4BFF] resume border-none text-gray-50 md:px-6 px-5 py-3 md:py-4">Build Resume</Link>
                         </div>
                         <div>
                             <p className='m-0 text-[#BDBDBD]'>No registration required</p>
@@ -74,11 +81,81 @@ function Home(props) {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className='xl:mx-16 lg:mx-14 md:mx-10 sm:mx-9 mx-7'>
                 <div>
-                    <p className="text-center m-0">Build your <p></p></p>
+                    <p className="text-center xl:text-[48.6px] font-semibold tracking-[1%] lg:text-[40px] md:text-[32px] sm:text-[30px] text-[24px] m-0">Build your <span className='text-[#2C4BFF]'> resume </span>in 3 steps</p>
+                </div>
+                <div className='flex md:my-0 my-4 items-center justify-between gap-3'>
+                    <div className='flex items-center gap-3'>
+                        <div>
+                            <img className='xl:w-[240px] lg:w-[200px] md:w-[180px] sm:w-[150px] w-[120px]' src={ImageOne} alt="" />
+                        </div>
+                        <div className='flex items-center gap-3'>
+                            <div>
+                                <p className="m-0 xl:text-[57.81px] text-[#2C4BFF] lg:text-[50px] md:text-[45px] sm:text-[42px] text-[35px]">1.</p>
+                            </div>
+                            <div className=''>
+                                <div>
+                                    <p className="m-0 font-bold sm:font-semibold md:font-semibold text-[#2C4BFF]" >Pick a Template</p>
+                                </div>
+                                <div>
+                                    <p className="m-0 text-[#2C4BFF]">Fill in the blanks and see results in real-time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='xl:ms-50 lg:ms-40'>
+                        <img className='xl:w-[70px] lg:w-[65px] md:w-[50px] w-[60px]' src={Circle} alt="" />
+                    </div>
+                </div>
+                <div className='flex md:my-0 my-4 items-center justify-end gap-3'>
+                    <div className='flex gap-3 items-end'>  
+                        <div>
+                            <img className='xl:w-[70px] lg:w-[65px] md:w-[50px] w-[60px]' src={Vector} alt="" />
+                        </div>
+                        <div>
+                            <img className='xl:w-[240px] lg:w-[200px] md:w-[180px] sm:w-[150px] w-[120px]'  src={ImageTwo} alt="" />
+                        </div>
+                    </div>
+                    <div className='flex items-center gap-3'>
+                        <div>
+                            <p className="m-0 xl:text-[57.81px] text-[#2C4BFF] lg:text-[50px] md:text-[45px] sm:text-[42px] text-[35px]">2.</p>
+                        </div>
+                        <div className=''>
+                            <div>
+                                <p className="m-0 font-bold sm:font-semibold md:font-semibold text-[#2C4BFF]" >Customize Your Layout</p>
+                            </div>
+                            <div>
+                                <p className="m-0 text-[#2C4BFF]">Give your document a professional and elegant look.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex md:my-0 my-4 items-start justify-between'>
+                    <div className='flex items-center gap-3'>
+                        <div>
+                            <img className='xl:w-[240px] lg:w-[200px] md:w-[180px] sm:w-[150px] w-[120px]'  src={ImageThree} alt="" />
+                        </div>
+                        <div className='flex items-center gap-3'>
+                            <div>
+                                <p className="m-0 xl:text-[57.81px] text-[#2C4BFF] lg:text-[50px] md:text-[45px] sm:text-[42px] text-[35px]">3.</p>
+                            </div>
+                            <div className=''>
+                                <div>
+                                    <p className="m-0 font-bold sm:font-semibold md:font-semibold text-[#2C4BFF]" >Hit 'Download!</p>
+                                </div>
+                                <div>
+                                    <p className="m-0 text-[#2C4BFF]">Download your resume, apply, get more interviews.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img className='xl:w-[70px] lg:w-[65px] md:w-[50px] w-[60px]' src={Polygon} alt="" />
+                    </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

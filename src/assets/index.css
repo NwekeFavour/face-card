@@ -1,0 +1,26 @@
+.footer{
+    background-image: url("../../public/img/Frame\ 55.svg");
+    height: 100vh;
+    width: 100%;
+    background-position: unset;
+}
+
+
+@media screen and (max-width:400px) {
+    .footer{
+        background-position: top !important;
+        /* height: 1px !important; */
+        
+    }
+}
+
+@media screen and (min-width:768px) {
+    .footer{
+        height: 30vh;
+    }
+}
+@media screen and (max-width:768px) {
+    .footer{
+        height: 40vh;
+    }
+}
