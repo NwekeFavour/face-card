@@ -81,7 +81,7 @@ function Home(props) {
                     </div>
                 </div>
             </div>
-            <div className='xl:mx-16 lg:mx-14 md:mx-10 sm:mx-9 mx-7'>
+            <div className='xl:mx-16 lg:mx-14 md:mx-10 sm:mx-9 mx-5'>
                 <div>
                     <p className="text-center xl:text-[48.6px] font-semibold tracking-[1%] lg:text-[40px] md:text-[32px] sm:text-[30px] text-[24px] m-0">Build your <span className='text-[#2C4BFF]'> resume </span>in 3 steps</p>
                 </div>
