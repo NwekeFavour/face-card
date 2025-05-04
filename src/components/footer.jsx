@@ -1,12 +1,11 @@
 import React from 'react';
-import "../assets/index.css"
 import FC from "../../public/img/face-card.svg"
 import { Link } from 'react-router-dom';
 
 function Footer(props) {
     return (
-        <div className='footer '>
-            <footer className="m-4 md:pt-10 pt-10">
+        <div className=' '>
+            <footer className="m-4 ">
                 <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <Link to={"/"} className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
