@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Group from "../../public/img/Group 5.svg"
 import { Link } from 'react-router-dom';
 import  Icon from "../../public/img/icon_three.svg"
@@ -14,35 +14,23 @@ import Polygon from "../../public/img/Polygon.svg"
 import Circle from "../../public/img/circle.svg"
 import Vector from "../../public/img/Group221.svg"
 import Footer from '../components/footer';
+import Header from '../components/header';
 import * as motion from "motion/react-client"
-import { useScroll } from 'motion/react';
 
 
 function Home(props) {
-    const { scrollYProgress } = useScroll()
-
+    const [dialog, setDialog] = useState(false)
+    const token = localStorage.getItem("token")
     return (    
         <div>
-            <motion.div
-                id="scroll-indicator"
-                style={{
-                    scaleX: scrollYProgress,
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 4,
-                    originX: 0,
-                    backgroundColor: "#2C4BFF",
-                }}
-            />
+            <Header/>
             <div className='sm:flex sm:mx-12 md:flex block justify-around md:mx-10 lg:mx-20 items-center'>
                 <div className=' md:mx-0 sm:mx-0 mx-5'>
                     <p className="m-0 md:text-[30px] w-[100%] lg:text-[48px] sm:w-[300px] md:w-[400px] lg:w-[487px] sm:text-[28px] text-[26px] leading-[auto] font-bold">Stand out with a professionally designed resume</p>
                     <p className='lg:text-[16px] md:text-[15px] md:mt-3 sm:mt-4 sm:mb-4 my-4 leading-[200%] text-[#4F4F4F] sm:text-[12px] text-[14px] '>By employing the best practices and innovative tech, Resume Builder boosts your chances of landing a better job – completely for free.</p>
                     <div className='flex items-center gap-4 md:mt-4'>
                          <div>
-                            <Link className="bg-[#2C4BFF] resume border-none text-gray-50 md:px-6 px-5 py-3 md:py-4">Build Resume</Link>
+                            {token ? <Link to={`/dashboard`}  className="bg-[#2C4BFF] resume border-none text-gray-50 md:px-6 px-5 py-3 md:py-4">Build Resume</Link> :  <Link to={`/dashboard/app/account/login`}  className="bg-[#2C4BFF] resume border-none text-gray-50 md:px-6 px-5 py-3 md:py-4">Build Resume</Link>}
                         </div>
                         <div>
                             <p className='m-0 text-[#BDBDBD]'>No registration required</p>
